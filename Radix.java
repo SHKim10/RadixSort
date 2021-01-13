@@ -15,9 +15,11 @@ public class Radix{
     return Math.max(1, answer);
   }
 
-  public static void merge(MyLinkedList original, MyLinkedList[]buckets){
+  public static void merge(SortableLinkedList original, SortableLinkedList[] buckets){
     for(int i = 0; i < buckets.length; i++){
       original.extend(buckets[i]);
     }
   }
+
+
 }
