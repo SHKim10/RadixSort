@@ -24,42 +24,36 @@ public class Radix{
   }
 
   public static void radixSortSimple(SortableLinkedList data){
-    int pass = 0;
-    int element = data.remove(0);
     SortableLinkedList[] buckets = new SortableLinkedList[10];
-    for (int i = 0; i < 10; i++){
+    for (int i = 0; i < buckets.length; i++){
       buckets[i] = new SortableLinkedList();
     }
-    for (int i = 0; i < data.size(); i++){
-      pass = Math.max(pass, length(data.get(0)));
-      data.add(element);
-    }
+    int pass = 1;
     for (int i = 0; i < pass; i++){
-      while (data.size() > 0){
-        buckets[nth(data.get(0), i)].add(element);
-        merge(data,buckets);
+      while (data.size() < 0){
+        if (i == 0){
+          pass = Math.max(pass, length(data.remove(0)));
+        }
+        buckets[nth(data.remove(0), i)].add(data.remove(0));
       }
+      merge(data,buckets);
     }
   }
 
   public static void radixSort(SortableLinkedList data){
     SortableLinkedList positive = new SortableLinkedList();
     SortableLinkedList negative = new SortableLinkedList();
-    for (int i = 0; i < data.size(); i++){
-      int element = data.get(i);
-      if (element < 0){
-        negative.add(element);
+    while (data.size() > 0){
+      if (data.remove(0) >= 0){
+        positive.add(data.remove(0));
       } else {
-        positive.add(element);
+        negative.add(data.remove(0));
       }
-    }
-    while (data.size() != 0){
-      data.remove(0);
     }
     radixSortSimple(positive);
     radixSortSimple(negative);
-    for (int i = negative.size()-1; i >= 0; i--){
-      data.add(negative.get(i));
+    while (negative.size() > 0){
+      data.add(negative.remove(negative.size()-1));
     }
     data.extend(positive);
   }
