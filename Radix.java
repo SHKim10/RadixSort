@@ -1,3 +1,5 @@
+import java.util.*;
+import java.io.*;
 public class Radix{
 
   public static int nth(int n, int col){
@@ -21,5 +23,26 @@ public class Radix{
     }
   }
 
+  public static void radixSortSimple(SortableLinkedList data){
+    int pass = 0;
+    int element = data.remove(0);
+    SortableLinkedList[] buckets = new SortableLinkedList[10];
+    for(int i = 0; i < 10; i++){
+      buckets[i] = new SortableLinkedList();
+    }
+    for(int i = 0; i < data.size(); i++){
+      pass = Math.max(pass, length(data.get(0)));
+      data.add(element);
+    }
+    for(int i = 0; i < pass; i++){
+      while(data.size() > 0){
+        buckets[nth(data.get(0), i)].add(element);
+        merge(data,buckets);
+      }
+    }
+  }
 
+  public static void radixSort(SortableLinkedList data){
+
+  }
 }
