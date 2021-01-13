@@ -1,17 +1,18 @@
 public class Radix{
+
   public static int nth(int n, int col){
-    /*get nth digit of an int, where 0 is the ones column, 1 is the tens column etc.
-    nth(123,1) -> 2
-    nth(-123,1) -> 2
-    nth(123,2) -> 1
-    nth(-123,2) -> 1*/
+    int a = (int) (n / Math.pow(10, col));
+    return Math.abs(a % 10);
   }
+
   public static int length(int n){
-    return the number of digits in n.
-    /*length(0) -> 1
-    length(15) -> 2
-    length(-10) -> 2
-    length(5112) -> 4*/
+    int a = Math.abs(n);
+    int answer = 0;
+    while(a > 0){
+      answer++;
+      a /= 10;
+    }
+    return Math.max(1, answer);
   }
 
   public static void merge(MyLinkedList original,MyLinkedList[]buckets){
