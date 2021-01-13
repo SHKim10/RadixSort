@@ -43,6 +43,24 @@ public class Radix{
   }
 
   public static void radixSort(SortableLinkedList data){
-
+    SortableLinkedList positive = new SortableLinkedList();
+    SortableLinkedList negative = new SortableLinkedList();
+    for(int i = 0; i < data.size(); i++){
+      int element = data.get(i);
+      if (element < 0){
+        negative.add(element);
+      } else {
+        positive.add(element);
+      }
+    }
+    while(data.size() != 0){
+      data.remove(0);
+    }
+    radixSortSimple(positive);
+    radixSortSimple(negative);
+    for(int i = negative.size()-1; i >= 0; i--){
+      data.add(negative.get(i));
+    }
+    data.extend(positive);
   }
 }
