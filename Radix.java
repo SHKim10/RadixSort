@@ -15,9 +15,9 @@ public class Radix{
     return Math.max(1, answer);
   }
 
-  public static void merge(MyLinkedList original,MyLinkedList[]buckets){
-    /*Merge all of the linked lists in the bucket array into your original linked list.
-    This is O(buckets.length) which should be 10 when we use this later.
-    The bucket[0] list will be merged first, then the bucket[1] etc.*/
+  public static void merge(MyLinkedList original, MyLinkedList[]buckets){
+    for(int i = 0; i < buckets.length; i++){
+      original.extend(buckets[i]);
+    }
   }
 }
